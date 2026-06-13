@@ -2049,6 +2049,48 @@ const LOC_CONFIG = {
       ],
     },
   },
+  mountainview: {
+    propTaxRate: 0.0125,
+    propTaxTracksValue: false,
+    propTaxAnnualIncrease: 0.02,
+    taxRate: 0.44,
+    stateRateGroup: "ca",
+    improvPct: 0.22,
+    typicalYieldRange: [0.018, 0.028],
+    propTaxNote: "CA Prop 13: 1.25% of purchase price, +2%/yr max",
+    propTaxNoteZh: "加州13号提案：购价1.25%，每年最多上涨2%",
+    taxNote: "44% (35% fed + 9.3% CA)",
+    taxNoteZh: "44%（联邦35% + 加州9.3%）",
+    stateCapGainsRate: 0.133,
+    vacancyRate: 0.04,
+    mgmtFeeRate: 0.08,
+    sources: {
+      homePrice: [
+        {
+          text: "Zillow ZHVI Mountain View",
+          href: "https://www.zillow.com/research/data/",
+        },
+      ],
+      rentPre2015: [
+        {
+          text: "BLS CPI West Urban Rent",
+          href: "https://fred.stlouisfed.org/series/CUUR0400SEHA",
+        },
+      ],
+      rentPost2015: [
+        {
+          text: "Zillow ZORI San Jose",
+          href: "https://www.zillow.com/research/data/",
+        },
+      ],
+      rentYield: [
+        {
+          text: "Zillow ZHVI / ZORI Mountain View",
+          href: "https://www.zillow.com/research/data/",
+        },
+      ],
+    },
+  },
   atherton: {
     propTaxRate: 0.0125,
     propTaxTracksValue: false,
@@ -3174,6 +3216,7 @@ const LOCATION_HIERARCHY = [
         abbr: "SF Bay",
         cities: [
           { key: "paloalto", label: "Palo Alto", abbr: "PALT" },
+          { key: "mountainview", label: "Mountain View", abbr: "MTVW" },
           { key: "atherton", label: "Atherton", abbr: "ATHN" },
           { key: "losaltos", label: "Los Altos", abbr: "LALT" },
           { key: "menlopark", label: "Menlo Park", abbr: "MNPK" },
@@ -3301,6 +3344,28 @@ const INDEX_SOURCES = {
       {
         text: "multpl.com (dividends)",
         href: "https://www.multpl.com/nasdaq-dividend-yield/table/by-year",
+      },
+    ],
+    live: [
+      {
+        text: "FMP API",
+        href: "https://financialmodelingprep.com/developer/docs",
+      },
+    ],
+  },
+  fifty50: {
+    returns: [
+      {
+        text: "Macrotrends S&P 500",
+        href: "https://www.macrotrends.net/2526/sp-500-historical-annual-returns",
+      },
+      {
+        text: "Macrotrends NASDAQ",
+        href: "https://www.macrotrends.net/1320/nasdaq-historical-chart",
+      },
+      {
+        text: "multpl.com (dividends)",
+        href: "https://www.multpl.com/s-p-500-dividend-yield/table/by-year",
       },
     ],
     live: [
@@ -8907,6 +8972,10 @@ const SIX_FORTY_PRICE = SP500_PRICE.map(
   (r, i) => 0.6 * r + 0.4 * (TLT_TOTAL[i] - TLT_YIELD[i]),
 );
 const SIX_FORTY_DIV = SP500_DIV.map((r, i) => 0.6 * r + 0.4 * TLT_YIELD[i]);
+const FIFTY_FIFTY_PRICE = SP500_PRICE.map(
+  (r, i) => 0.5 * r + 0.5 * NASDAQ_PRICE[i],
+);
+const FIFTY_FIFTY_DIV = SP500_DIV.map((r, i) => 0.5 * r + 0.5 * NASDAQ_DIV[i]);
 
 let SP500_ANN = SP500_PRICE.map((r, i) => r + SP500_DIV[i]);
 
@@ -9208,6 +9277,7 @@ const CS_LOC_MAP = {
   carlsbad: _CS_SD,
   sf: _CS_SF,
   paloalto: _CS_SF,
+  mountainview: _CS_SF,
   atherton: _CS_SF,
   losaltos: _CS_SF,
   menlopark: _CS_SF,
